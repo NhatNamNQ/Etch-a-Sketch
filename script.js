@@ -42,7 +42,7 @@ hovering();
 buttonSize.addEventListener("click", () => {
     let squarePerSide = prompt("The number of squares per side for the new grid (0 - 100)");
     if (squarePerSide <= 0 || squarePerSide > 100) {
-        alert("Please input the size from 0 to 100");
+        alert("Please input the size from 1 to 100");
         return;
     }
     removeSquares(squarePerSide);
