@@ -1,7 +1,6 @@
 // create container
 const container = document.createElement("div");
 container.classList.add("container");
-
 const body = document.querySelector("body");
 body.appendChild(container);
 
@@ -17,9 +16,10 @@ const squareContainer = document.createElement("div");
 squareContainer.classList.add("square-container");
 container.appendChild(squareContainer);
 
-// create grid
+// grid 16 x 16
 createSquares(16);
 hovering();
+
 button.addEventListener("click", () => {
     let squarePerSide = prompt("The number of squares per side for the new grid");
     removeSquares(squarePerSide);
@@ -27,9 +27,7 @@ button.addEventListener("click", () => {
     hovering();
 });
 
-
 function createSquares(size) {
-
     for (let i = 0; i < size * size; i++) {
         const div = document.createElement("div");
         div.id = "square";
@@ -39,15 +37,24 @@ function createSquares(size) {
     }
 }
 
-
-//add effect to the grid
 function hovering() {
     squareContainer.addEventListener("mouseover", (event) => {
-        event.target.style.backgroundColor = randomColor();
+        const square = event.target;
+        if (!square.dataset.hovered) {
+            square.style.backgroundColor = randomColor();
+            square.style.opacity = 0.1;
+            square.dataset.hovered = "true";
+            square.dataset.hoverCount = 1;
+        } else {
+            let hoverCount = parseInt(square.dataset.hoverCount, 10);
+            let newOpacity = Math.min(hoverCount * 0.1 + 0.1, 1);
+            hoverCount++;
+            square.dataset.hoverCount = hoverCount;
+            square.style.opacity = newOpacity;
+        }
     });
 }
 
-//function random color
 function randomColor() {
     let letters = '0123456789ABCDEF';
     let color = '#';
@@ -57,7 +64,6 @@ function randomColor() {
     return color;
 }
 
-//function remove web
 function removeSquares(size) {
     const div = document.querySelectorAll("#square");
     div.forEach(x => x.remove());
