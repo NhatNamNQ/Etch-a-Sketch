@@ -1,15 +1,32 @@
+const body = document.querySelector("body");
+
 // create container
 const container = document.createElement("div");
 container.classList.add("container");
-const body = document.querySelector("body");
 body.appendChild(container);
 
-// create button prompt the user
-const button = document.createElement("button");
-button.id = "btnSize";
-button.textContent = "Change size of the grid";
-container.appendChild(button);
+//create the header
+const header = document.createElement("div");
+header.classList.add("header");
+const h1 = document.createElement("h1");
+h1.textContent = "Etch-a-Sketch";
+header.appendChild(h1);
+container.appendChild(header);
 
+// create button prompt the user
+const buttons = document.createElement("div");
+buttons.classList.add("buttons");
+container.appendChild(buttons);
+
+const buttonSize = document.createElement("button");
+buttonSize.id = "btn";
+buttonSize.textContent = "Change size";
+buttons.appendChild(buttonSize);
+
+const buttonReset = document.createElement("button");
+buttonReset.id = "btn";
+buttonReset.textContent = "Reset grid";
+buttons.appendChild(buttonReset);
 
 // create square's container
 const squareContainer = document.createElement("div");
@@ -31,8 +48,8 @@ function createSquares(size) {
     for (let i = 0; i < size * size; i++) {
         const div = document.createElement("div");
         div.id = "square";
-        div.style.width = `${960 / size}px`;
-        div.style.height = `${960 / size}px`;
+        div.style.width = `${480 / size}px`;
+        div.style.height = `${480 / size}px`;
         squareContainer.appendChild(div);
     }
 }
