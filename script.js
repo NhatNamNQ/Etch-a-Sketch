@@ -33,18 +33,27 @@ const squareContainer = document.createElement("div");
 squareContainer.classList.add("square-container");
 container.appendChild(squareContainer);
 
+squareContainer.dataset.squarePerSide = 0;
 // grid 16 x 16
 createSquares(16);
 hovering();
 
-button.addEventListener("click", () => {
+
+buttonSize.addEventListener("click", () => {
     let squarePerSide = prompt("The number of squares per side for the new grid");
     removeSquares(squarePerSide);
     createSquares(squarePerSide);
     hovering();
 });
 
+buttonReset.addEventListener("click", () => {
+    removeSquares(squareContainer.dataset.squarePerSide);
+    createSquares(squareContainer.dataset.squarePerSide);
+    hovering();
+})
+
 function createSquares(size) {
+    squareContainer.dataset.squarePerSide = size;
     for (let i = 0; i < size * size; i++) {
         const div = document.createElement("div");
         div.id = "square";
